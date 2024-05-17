@@ -6,8 +6,14 @@ import Row from 'react-bootstrap/Row';
 import * as formik from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddCarForm() {
+
+    const notify = () => toast.success("Car Added Successfully!");
+
+
     const { Formik } = formik;
 
     const schema = yup.object().shape({
@@ -30,12 +36,15 @@ function AddCarForm() {
         try {
             const response = await axios.post('http://localhost:3001/addCar', values);
             console.log('Car added successfully:', response.data);
+            toast.success("Car Added Successfully!");
         } catch (error) {
             console.error('Error adding car:', error);
+            toast.error("Something went wrong!");
         }
     };
 
     return (
+
         <Formik
             validationSchema={schema}
             onSubmit={handleSubmit}
@@ -67,6 +76,7 @@ function AddCarForm() {
         //         "Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
         // }}
         >
+
             {({ handleSubmit, handleChange, values, touched, errors }) => (
                 <Form noValidate onSubmit={handleSubmit} className="mt-3 mb-3">
                     <Row className="mb-3">

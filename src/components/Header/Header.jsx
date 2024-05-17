@@ -25,7 +25,7 @@ const navLinks = [
     display: "Contact",
   },
   {
-    path: "/admin",
+    path: "/admin/addCar",
     display: "Admin",
   },
 ];
@@ -161,7 +161,7 @@ const Header = () => {
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="mobile__menu">
-              <i className="ri-menu-line" onClick={toggleMenu}></i>
+              <i class="ri-menu-line" onClick={toggleMenu}></i>
             </span>
 
             <div className="navigation" ref={menuRef} onClick={toggleMenu}>
@@ -169,8 +169,8 @@ const Header = () => {
                 {linksToUse.map((item, index) => (
                   <NavLink
                     to={item.path}
-                    className={(navClass) =>
-                      navClass.isActive ? "nav__active nav__item" : "nav__item"
+                    className={(navclassName) =>
+                      navclassName.isActive ? "nav__active nav__item" : "nav__item"
                     }
                     key={index}
                   >
