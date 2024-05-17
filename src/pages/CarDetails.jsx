@@ -9,7 +9,7 @@ import PaymentMethod from "../components/UI/PaymentMethod";
 
 const CarDetails = () => {
   const { slug } = useParams();
-
+  
   const singleCarItem = carData.find((item) => item.carName === slug);
 
   useEffect(() => {
