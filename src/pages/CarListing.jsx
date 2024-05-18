@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import CarItem from "../components/UI/CarItem";
-import carData from "../assets/data/carData";
+import axios from "axios";
 
 const CarListing = () => {
+  const [carData, setCarData] = useState([]);
+  console.log(carData);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/getAllCars")
+      .then((response) =>{
+        setCarData(response.data.cars)
+      } )
+      .catch((error) => console.error(error));
+  }, []);
+
+
+
+
   return (
     <Helmet title="Cars">
       <CommonSection title="Car Listing" />
@@ -14,8 +28,8 @@ const CarListing = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <div className=" d-flex align-items-center gap-3 mb-5">
-                <span className=" d-flex align-items-center gap-2">
+              <div className="d-flex align-items-center gap-3 mb-5">
+                <span className="d-flex align-items-center gap-2">
                   <i className="ri-sort-asc"></i> Sort By
                 </span>
 
