@@ -11,8 +11,7 @@ import Contact from "../pages/Contact";
 import AddCar from '../pages/Admin/AddCar';
 import ContactDetails from "../pages/Admin/ContactDetails";
 import BookingInformation from "../pages/Admin/BookingInformation";
-
-
+import EditCar from "../pages/Admin/EditCar";
 const Routers = () => {
   return (
     <Routes>
@@ -20,14 +19,15 @@ const Routers = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/cars" element={<CarListing />} />
-      <Route path="/cars/:slug" element={<CarDetails />} />
+      <Route path="/cars/:id" element={<CarDetails />} />
       <Route path="/blogs" element={<Blog />} />
-      <Route path="/blogs/:slug" element={<BlogDetails />} />
+      <Route path="/blogs/:id" element={<BlogDetails />} />
       <Route path="/contact" element={<Contact />} />
       {/* For Admin Pages */}
       <Route path="/admin/addCar" element={<AddCar />} />
       <Route path="/admin/ContactDetails" element={<ContactDetails />} />
       <Route path="/admin/BookingInformation" element={<BookingInformation />} />
+      <Route path="/admin/carDetails" element={<EditCar />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

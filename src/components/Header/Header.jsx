@@ -172,9 +172,10 @@ const Header = () => {
               <div className="menu">
                 {linksToUse.map((item, index) => (
                   <NavLink
-                    to={item.path}
-                    className={(navclassName) =>
-                      navclassName.isActive ? "nav__active nav__item" : "nav__item"
+                   
+                  to={item.path}
+                    className={(navClass) =>
+                      navClass.isActive ? "nav__active nav__item" : "nav__item"
                     }
                     key={index}
                   >

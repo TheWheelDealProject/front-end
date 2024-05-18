@@ -1,28 +1,47 @@
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Col } from "reactstrap";
 import "../../styles/blog-item.css";
 import { Link } from "react-router-dom";
-import blogData from "../../assets/data/blogData";
+import bogData from "../../assets/data/blogData";
+import axios from "axios";
+
+
+
 
 const BlogList = () => {
-  return (
-    <>
-      {blogData.map((item) => (
+ 
+  const [blogData,setBlogData] = useState([])
+  
+  useEffect(()=>{
+  axios
+  .get("http://localhost:3001/getAllBlogs")
+  .then((Response)=>{
+   setBlogData(Response.data.blogs)
+  
+  })
+  .catch((error)=>{console.error(error)})
+  },[])
+  
+   return (
+     <>
+         {blogData.map((item) => (
         <BlogItem item={item} key={item.id} />
-      ))}
-    </>
-  );
-};
 
-const BlogItem = ({ item }) => {
-  const { imgUrl, title, author, date, description, time } = item;
+      ))}
+      
+    </>
+   );
+ };
+
+  const BlogItem = ({ item }) => {
+  const { imgurl, title, author, date, description, time } = item;
 
   return (
     <Col lg="4" md="6" sm="6" className="mb-5">
       <div className="blog__item">
-        <img src={imgUrl} alt="" className="w-100" />
+        <img src={imgurl} alt="" className="w-100" />
         <div className="blog__info p-3">
-          <Link to={`/blogs/${title}`} className="blog__title">
+          <Link to={`/blogs/${title}`}  className="blog__title">
             {title}
           </Link>
           <p className="section__description mt-3">
@@ -54,6 +73,10 @@ const BlogItem = ({ item }) => {
       </div>
     </Col>
   );
-};
+ 
+}; 
+
+
 
 export default BlogList;
+
