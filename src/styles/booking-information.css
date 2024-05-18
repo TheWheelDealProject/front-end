@@ -1,0 +1,29 @@
+.bookingInformation-title{
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+    margin-bottom: 20px    ;
+}
+
+.booking-table-base{
+    display:flex ;
+    justify-content: center;
+    margin-bottom: 100px;
+    }
+
+.booking-table {
+    width: 60%; /* Make the table full width */
+    border-collapse: collapse; /* Remove extra spacing between cells */
+    
+}
+
+.booking-table th, .booking-table td {
+    border: 1px solid #000000;  /* Add a light border */
+    padding: 10px;            
+    text-align: center;        
+}
+.booking-table th { /* Style the table header */
+    background-color: rgb(0,14,106); 
+    color: aliceblue;
+}
+

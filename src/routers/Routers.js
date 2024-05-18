@@ -9,6 +9,9 @@ import BlogDetails from "../pages/BlogDetails";
 import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import AddCar from '../pages/Admin/AddCar';
+import ContactDetails from "../pages/Admin/ContactDetails";
+import BookingInformation from "../pages/Admin/BookingInformation";
+
 
 const Routers = () => {
   return (
@@ -23,6 +26,8 @@ const Routers = () => {
       <Route path="/contact" element={<Contact />} />
       {/* For Admin Pages */}
       <Route path="/admin/addCar" element={<AddCar />} />
+      <Route path="/admin/ContactDetails" element={<ContactDetails />} />
+      <Route path="/admin/BookingInformation" element={<BookingInformation />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
