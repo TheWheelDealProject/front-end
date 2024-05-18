@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, FormGroup, Input } from "reactstrap";
 
 import { useParams } from "react-router-dom";
@@ -9,44 +9,63 @@ import { Link } from "react-router-dom";
 import commentImg from "../assets/all-images/ava-1.jpg";
 
 import "../styles/blog-details.css";
+import axios from "axios";
 
 const BlogDetails = () => {
-  const { slug } = useParams();
-  const blog = blogData.find((blog) => blog.title === slug);
+  const { id } = useParams();
+  
+  const [blogData,setBlogData] = useState([])
+ 
+  
+  useEffect(()=>{
+     axios
+     .get("http://localhost:3001/getAllBlogs")
+     .then((Response)=>{
+       setBlogData(Response.data.blogs)
+       
+      })
+      .catch((error)=>{console.error(error)})
+    },[])
+    
+    const blog = blogData.filter((blog) => blog.title === (id));
+    console.log(blog);
+    
+    
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [blog]);
-
+   
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [blog]);
+    
   return (
-    <Helmet title={blog.title}>
+    <Helmet title={blog[0]?.title}>
       <section>
         <Container>
           <Row>
             <Col lg="8" md="8">
               <div className="blog__details">
-                <img src={blog.imgUrl} alt="" className="w-100" />
-                <h2 className="section__title mt-4">{blog.title}</h2>
+                <img src={blog[0]?.imgUrl} alt="" className="w-100" />
+                <h2 className="section__title mt-4">{blog[0]?.title}</h2>
 
                 <div className="blog__publisher d-flex align-items-center gap-4 mb-4">
                   <span className="blog__author">
-                    <i className="ri-user-line"></i> {blog.author}
+                    <i className="ri-user-line"></i> {blog[0]?.author}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
-                    <i className="ri-calendar-line"></i> {blog.date}
+                    <i className="ri-calendar-line"></i> {blog[0]?.date}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
-                    <i className="ri-time-line"></i> {blog.time}
+                    <i className="ri-time-line"></i> {blog[0]?.time}
                   </span>
                 </div>
 
-                <p className="section__description">{blog.description}</p>
+                <p className="section__description">{blog[0]?.description}</p>
                 <h6 className="ps-5 fw-normal">
-                  <blockquote className="fs-4">{blog.quote}</blockquote>
+                  <blockquote className="fs-4">{blog[0]?.quote}</blockquote>
                 </h6>
-                <p className="section__description">{blog.description}</p>
+                <p className="section__description">{blog[0]?.description}</p>
               </div>
 
               <div className="comment__list mt-5">
@@ -95,6 +114,8 @@ const BlogDetails = () => {
                     </button>
                   </Form>
                 </div>
+
+
               </div>
             </Col>
 
@@ -103,21 +124,24 @@ const BlogDetails = () => {
                 <h5 className=" fw-bold">Recent Posts</h5>
               </div>
               {blogData.map((item) => (
+                
                 <div className="recent__blog-post mb-4" key={item.id}>
                   <div className="recent__blog-item d-flex gap-3">
                     <img src={item.imgUrl} alt="" className="w-25 rounded-2" />
                     <h6>
-                      <Link to={`/blogs/${item.title}`}>{blog.title}</Link>
+                      <Link to={`/blogs/${item.title}`}>{item.title}</Link>
                     </h6>
                   </div>
+                  
                 </div>
               ))}
             </Col>
           </Row>
         </Container>
       </section>
-    </Helmet>
+    // </Helmet>
   );
 };
+
 
 export default BlogDetails;
