@@ -9,7 +9,7 @@ function AddCar() {
             <Container>
                 <Row>
                     <Col>
-                        < AddCarForm />
+                        < AddCarForm  />
                     </Col>
                 </Row>
             </Container>
