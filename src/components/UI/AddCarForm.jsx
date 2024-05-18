@@ -11,7 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function AddCarForm() {
 
-    const notify = () => toast.success("Car Added Successfully!");
 
 
     const { Formik } = formik;
@@ -30,13 +29,14 @@ function AddCarForm() {
         description: yup.string().required('Description is required'),
     });
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = async (values, { resetForm }) => {
         console.log("I am in handle submit function");
         console.log('Form Data:', values);
         try {
             const response = await axios.post('http://localhost:3001/addCar', values);
             console.log('Car added successfully:', response.data);
             toast.success("Car Added Successfully!");
+            resetForm();
         } catch (error) {
             console.error('Error adding car:', error);
             toast.error("Something went wrong!");
@@ -77,7 +77,7 @@ function AddCarForm() {
         // }}
         >
 
-            {({ handleSubmit, handleChange, values, touched, errors }) => (
+            {({ handleSubmit, handleChange, values, touched, errors, resetForm }) => (
                 <Form noValidate onSubmit={handleSubmit} className="mt-3 mb-3">
                     <Row className="mb-3">
                         <Form.Group as={Col} md="6" controlId="formCarName">
