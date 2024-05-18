@@ -26,6 +26,15 @@ const socialLinks = [
 ];
 
 const Contact = () => {
+  function fetchData(e) {
+    e.preventDefault();
+    let allData = {
+      name: e.target.fullName.value,
+      email: e.target.email.value,
+      text: e.target.textArea.value
+    }; 
+    console.log(allData);
+  }
   return (
     <Helmet title="Contact">
       <CommonSection title="Contact" />
@@ -35,15 +44,16 @@ const Contact = () => {
             <Col lg="7" md="7">
               <h6 className="fw-bold mb-4">Get In Touch</h6>
 
-              <Form>
+              <Form onSubmit={fetchData}>
                 <FormGroup className="contact__form">
-                  <Input placeholder="Your Name" type="text" />
+                  <Input name="fullName" placeholder="Your Name" type="text" />
                 </FormGroup>
                 <FormGroup className="contact__form">
-                  <Input placeholder="Email" type="email" />
+                  <Input name="email" placeholder="Email" type="email" />
                 </FormGroup>
                 <FormGroup className="contact__form">
                   <textarea
+                  name="textArea"
                     rows="5"
                     placeholder="Message"
                     className="textarea"
@@ -54,6 +64,8 @@ const Contact = () => {
                   Send Message
                 </button>
               </Form>
+
+              
             </Col>
 
             <Col lg="5" md="5">
