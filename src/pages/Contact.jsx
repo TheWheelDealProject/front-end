@@ -5,6 +5,8 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 
 import "../styles/contact.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const socialLinks = [
   {
@@ -16,7 +18,7 @@ const socialLinks = [
     icon: "ri-instagram-line",
   },
   {
-    url: "#",
+    url: "https://www.linkedin.com/in/yassin-al-farwan-9010b9266/",
     icon: "ri-linkedin-line",
   },
   {
@@ -28,13 +30,30 @@ const socialLinks = [
 const Contact = () => {
   function fetchData(e) {
     e.preventDefault();
-    let allData = {
-      name: e.target.fullName.value,
-      email: e.target.email.value,
-      text: e.target.textArea.value
-    }; 
-    console.log(allData);
+  
+    const fullName = e.target.fullName.value;
+    const email = e.target.email.value;
+    const textArea = e.target.textArea.value;
+  
+    const data = {
+      firstname: fullName,
+      email: email,
+      description: textArea
+    };
+  
+    axios
+      .post('http://localhost:3001/addContact', data)
+      .then(response => {
+        console.log(response.data); // Handle successful response
+        toast.success('Message Sent Successfully');
+        e.target.reset(); // Reset the form fields
+      })
+      .catch(error => {
+        console.error(error); // Handle error
+      });
   }
+
+
   return (
     <Helmet title="Contact">
       <CommonSection title="Contact" />
