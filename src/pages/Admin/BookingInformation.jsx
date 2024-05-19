@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import "../../styles/booking-information.css";
+import { Container } from 'react-bootstrap';
 
 
 function BookingInformation() {
@@ -40,51 +41,53 @@ function BookingInformation() {
 
   return (
     <>
-      <div className="bookingInformation-title">
-        <h1>Contact Details</h1>
-      </div>
-      <div className="booking-table-base">
-        {/* Table Structure */}
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th className='background-blue'>First Name</th>
-              <th className='background-blue'>Last Name</th>
-              <th className='background-blue'>E-mail</th>
-              <th className='background-blue'>Phone Number</th>
-              <th className='background-blue'>From Address</th>
-              <th className='background-blue'>To Address</th>
-              <th className='background-blue'>No Of Persons</th>
-              <th className='background-blue'>No Of Luggages</th>
-              <th className='background-blue'>Date</th>
-              <th className='background-blue'>Time</th>
-              <th className='background-blue'>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookingData.map((booking, index) => (
-              <tr key={index}>
-                <td>{booking.firstname}</td>
-                <td>{booking.lastname}</td>
-                <td>{booking.email}</td>
-                <td>{booking.phoneno}</td>
-                <td>{booking.fromaddress}</td>
-                <td>{booking.toaddress}</td>
-                <td>{booking.numofpersons}</td>
-                <td>{booking.numofbags}</td>
-                <td>{booking.journeydate}</td>
-                <td>{booking.journeytime}</td>
-                <td>
-                  <Button variant="danger" onClick={() => handleDelete(booking.id)}>
-                    Delete
-                  </Button>
-                </td>
+      <Container>
+        <div className="bookingInformation-title">
+          <h1>Booking Informations</h1>
+        </div>
+        <div className="booking-table-base">
+          {/* Table Structure */}
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th className='background-blue'>First Name</th>
+                <th className='background-blue'>Last Name</th>
+                <th className='background-blue'>E-mail</th>
+                <th className='background-blue'>Phone Number</th>
+                <th className='background-blue'>From Address</th>
+                <th className='background-blue'>To Address</th>
+                <th className='background-blue'>No Of Persons</th>
+                <th className='background-blue'>No Of Luggages</th>
+                <th className='background-blue'>Date</th>
+                <th className='background-blue'>Time</th>
+                <th className='background-blue'>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
-      <ToastContainer />
+            </thead>
+            <tbody>
+              {bookingData.map((booking, index) => (
+                <tr key={index}>
+                  <td>{booking.firstname}</td>
+                  <td>{booking.lastname}</td>
+                  <td>{booking.email}</td>
+                  <td>{booking.phoneno}</td>
+                  <td>{booking.fromaddress}</td>
+                  <td>{booking.toaddress}</td>
+                  <td>{booking.numofpersons}</td>
+                  <td>{booking.numofbags}</td>
+                  <td>{booking.journeydate}</td>
+                  <td>{booking.journeytime}</td>
+                  <td>
+                    <Button variant="danger" onClick={() => handleDelete(booking.id)}>
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+        <ToastContainer />
+      </Container>
     </>
   );
 }

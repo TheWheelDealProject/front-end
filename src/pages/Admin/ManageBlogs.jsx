@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import "../../styles/manage-blogs.css"
 
 const ManageBlogs = () => {
     const [blogs, setBlogs] = useState([]);
@@ -74,11 +75,11 @@ const ManageBlogs = () => {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Actions</th>
+                        <th className='header-table'>Title</th>
+                        <th className='header-table'>Author</th>
+                        <th className='header-table'>Date</th>
+                        <th className='header-table'>Time</th>
+                        <th className='header-table'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
