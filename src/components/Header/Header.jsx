@@ -83,7 +83,7 @@ const Header = () => {
               <div className="header__top__left">
                 <span>Need Help?</span>
                 <span className="header__top__help">
-                  <i className="ri-phone-fill"></i> +1-202-555-0149
+                  <i className="ri-phone-fill"></i> +962-6-123-4567
                 </span>
               </div>
             </Col>
@@ -111,10 +111,8 @@ const Header = () => {
               <div className="logo">
                 <h1>
                   <Link to="/home" className=" d-flex align-items-center gap-2">
-                    <i className="ri-car-line"></i>
-                    <span>
-                      Rent Car <br /> Service
-                    </span>
+                    <img src="https://i.ibb.co/GkJ5nW8/TWD111.png" width="200px"
+                    height="50px"></img>
                   </Link>
                 </h1>
               </div>
@@ -126,8 +124,8 @@ const Header = () => {
                   <i className="ri-earth-line"></i>
                 </span>
                 <div className="header__location-content">
-                  <h4>Bangladesh</h4>
-                  <h6>Sylhet City, Bangladesh</h6>
+                  <h4>Jordan</h4>
+                  <h6>Airport Road, Amman</h6>
                 </div>
               </div>
             </Col>

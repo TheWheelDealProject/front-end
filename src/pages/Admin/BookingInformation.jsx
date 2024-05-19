@@ -54,5 +54,5 @@ function BookingInformation () {
           </div>
         </>
       );
-    }
+    } 
 export default BookingInformation;

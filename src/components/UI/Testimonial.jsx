@@ -42,17 +42,17 @@ const Testimonial = () => {
     <Slider {...settings}>
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        The Wheel Deal made my road trip a breeze! 
+         Brand-new car, super smooth ride,
+         and the price couldn't be beat. 
+        I'll definitely be renting from them again.
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava01} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Kevin Star</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>
@@ -60,17 +60,16 @@ const Testimonial = () => {
 
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        I was hesitant to rent a car, but The Wheel Deal exceeded my expectations.
+         Their online booking was easy, the staff was friendly, 
+        and the car was spotless.
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava02} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Sara Jay</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>
@@ -78,17 +77,17 @@ const Testimonial = () => {
 
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        As a frequent traveler, I've tried many rental companies, 
+        but The Wheel Deal is my new go-to. Their prices are incredibly affordable,
+         and their cars are always in top condition.
+
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava03} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Jhon Gregory</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>
@@ -96,17 +95,18 @@ const Testimonial = () => {
 
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        I had a last-minute trip and The Wheel Deal saved the day!
+         They had a great selection of cars available, 
+         and the pickup process was quick and painless.
+
+
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava04} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Emily Klark</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>
