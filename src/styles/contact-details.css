@@ -26,3 +26,18 @@
     background-color: rgb(0,14,106); 
     color: aliceblue;
 }
+.header-table {
+    color: #fff !important;
+    background: #000d6b !important;
+}
+
+.spinner-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 300px !important;
+    /* Adjust the height as per your layout */
+}
+.contact-table-base{
+    padding: 50px 0px 175px 0px  ;
+    }

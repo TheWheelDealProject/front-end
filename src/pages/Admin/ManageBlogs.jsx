@@ -3,6 +3,7 @@ import { Table, Button, Container, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import "../../styles/manage-blogs.css"
+import { Spinner } from 'reactstrap';
 
 const ManageBlogs = () => {
     const [blogs, setBlogs] = useState([]);
@@ -15,6 +16,7 @@ const ManageBlogs = () => {
         description: '',
         quote: '',
     });
+    const [loading, setLoading] = useState(true); // New state variable for loading
 
     useEffect(() => {
         fetchBlogs();
@@ -22,18 +24,22 @@ const ManageBlogs = () => {
 
     const fetchBlogs = async () => {
         try {
+            setLoading(true); // Set loading to true before making the request
             const response = await axios.get('http://localhost:3001/getAllBlogs');
             setBlogs(response.data.blogs);
         } catch (error) {
             console.error('Error fetching blogs:', error);
+        } finally {
+            setLoading(false); // Set loading to false after the request is completed
         }
     };
+
 
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:3001/deleteBlog/${id}`);
             setBlogs(blogs.filter(blog => blog.id !== id));
-            toast.success("Car Added Successfully!");
+            toast.success("Blog Deleted Successfully!");
         } catch (error) {
             console.error('Error deleting blog:', error);
             toast.error("Something went wrong!");
@@ -62,7 +68,7 @@ const ManageBlogs = () => {
             await axios.put(`http://localhost:3001/editBlog/${currentBlog.id}`, currentBlog);
             fetchBlogs();
             handleCloseModal();
-            toast.success("Car Added Successfully!");
+            toast.success("Blog Updated Successfully!");
         } catch (error) {
             console.error('Error updating blog:', error);
             toast.error("Something went wrong!");
@@ -70,38 +76,47 @@ const ManageBlogs = () => {
     };
 
     return (
-        <Container>
-            <h1>Manage Blogs</h1>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th className='header-table'>Title</th>
-                        <th className='header-table'>Author</th>
-                        <th className='header-table'>Date</th>
-                        <th className='header-table'>Time</th>
-                        <th className='header-table'>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {blogs.map((blog) => (
-                        <tr key={blog.id}>
-                            <td>{blog.title}</td>
-                            <td>{blog.author}</td>
-                            <td>{blog.date}</td>
-                            <td>{blog.time}</td>
-                            <td>
-                                <Button variant="warning" onClick={() => handleShowModal(blog)}>
-                                    Edit
-                                </Button>{' '}
-                                <Button variant="danger" onClick={() => handleDelete(blog.id)}>
-                                    Delete
-                                </Button>
-                            </td>
+        <Container className="mt-3 mb-3">
+            <h1>Blogs Managments</h1>
+            {loading ? ( // Display the spinner when loading is true
+                <div className='spinner-container'>
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </div>
+            ) : (
+                 <div className="contact-table-base">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th className='header-table'>Title</th>
+                            <th className='header-table'>Author</th>
+                            <th className='header-table'>Date</th>
+                            <th className='header-table'>Time</th>
+                            <th className='header-table'>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
-
+                    </thead>
+                    <tbody>
+                        {blogs.map((blog) => (
+                            <tr key={blog.id}>
+                                <td>{blog.title}</td>
+                                <td>{blog.author}</td>
+                                <td>{blog.date}</td>
+                                <td>{blog.time}</td>
+                                <td>
+                                    <Button variant="warning" onClick={() => handleShowModal(blog)}>
+                                        Edit
+                                    </Button>{' '}
+                                    <Button variant="danger" onClick={() => handleDelete(blog.id)}>
+                                        Delete
+                                    </Button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+                 </div>
+            )}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Blog</Modal.Title>

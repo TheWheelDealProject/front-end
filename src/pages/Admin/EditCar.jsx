@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import "../../styles/edit-car.css"
+import { Spinner } from 'reactstrap';
 
 
 function EditCar() {
@@ -30,16 +31,21 @@ function EditCar() {
     });
 
     const [refresh, setRefresh] = useState(false);
+    const [loading, setLoading] = useState(true); // New state variable for loading
 
     useEffect(() => {
-        axios.get('http://localhost:3001/getAllCars')
-            .then(response => {
-                setCars(response.data.cars);
-                console.log(response.data.cars);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the cars!', error);
-            });
+        try {
+            setLoading(true);
+            axios.get('http://localhost:3001/getAllCars')
+                .then(response => {
+                    setCars(response.data.cars);
+                    console.log(response.data.cars);
+                })
+        } catch (error) {
+            console.error('There was an error fetching the cars!', error);
+        } finally {
+            setLoading(false);
+        }
     }, [refresh]);
 
     const handleDelete = (id) => {
@@ -106,44 +112,53 @@ function EditCar() {
 
     return (
         <Container className="mt-3 mb-3">
+            <h1>Cars Managments</h1>
             <Row>
                 <Col>
-                    <Table striped bordered hover style={{ borderRadius: '5px', overflow: 'hidden' }}>
-                        <thead>
-                            <tr >
-                                <th className='header-table'>ID</th>
-                                <th className='header-table'>Car Name</th>
-                                <th className='header-table'>Brand</th>
-                                <th className='header-table'>Price</th>
-                                <th className='header-table'>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array.isArray(cars) && cars.map(car => (
-                                <tr key={car.id}>
-                                    <td>{car.id}</td>
-                                    <td>{car.carname}</td>
-                                    <td>{car.brand}</td>
-                                    <td>{car.price}</td>
-                                    <td>
-                                        <Button
-                                            variant="warning"
-                                            onClick={() => handleUpdate(car)}
-                                            className="me-2"
-                                        >
-                                            Update
-                                        </Button>
-                                        <Button
-                                            variant="danger"
-                                            onClick={() => handleDelete(car.id)}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </td>
+                    {loading ? ( // Display the spinner when loading is true
+                        <div className='spinner-container'>
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </div>
+                    ) : (
+                        <Table striped bordered hover style={{ borderRadius: '5px', overflow: 'hidden' }}>
+                            <thead>
+                                <tr >
+                                    <th className='header-table'>ID</th>
+                                    <th className='header-table'>Car Name</th>
+                                    <th className='header-table'>Brand</th>
+                                    <th className='header-table'>Price</th>
+                                    <th className='header-table'>Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {Array.isArray(cars) && cars.map(car => (
+                                    <tr key={car.id}>
+                                        <td>{car.id}</td>
+                                        <td>{car.carname}</td>
+                                        <td>{car.brand}</td>
+                                        <td>{car.price}</td>
+                                        <td>
+                                            <Button
+                                                variant="warning"
+                                                onClick={() => handleUpdate(car)}
+                                                className="me-2"
+                                            >
+                                                Update
+                                            </Button>
+                                            <Button
+                                                variant="danger"
+                                                onClick={() => handleDelete(car.id)}
+                                            >
+                                                Delete
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    )}
                 </Col>
             </Row>
 

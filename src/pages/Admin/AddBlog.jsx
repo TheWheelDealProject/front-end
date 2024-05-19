@@ -45,7 +45,14 @@ const AddBlog = () => {
         try {
             const response = await axios.post('http://localhost:3001/addBlog', blogPostData);
             console.log('Blog added successfully:', response.data);
-            toast.success("Car Added Successfully!");
+            toast.success("Blog Added Successfully!");
+            setBlogData({
+                title: '',
+                author: '',
+                imgurl: '',
+                description: '',
+                quote: '',
+            })
         } catch (error) {
             console.error('Error adding blog:', error);
             toast.error("Something went wrong!");
