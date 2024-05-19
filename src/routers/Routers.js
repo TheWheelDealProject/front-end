@@ -12,6 +12,10 @@ import AddCar from '../pages/Admin/AddCar';
 import ContactDetails from "../pages/Admin/ContactDetails";
 import BookingInformation from "../pages/Admin/BookingInformation";
 import EditCar from "../pages/Admin/EditCar";
+
+import AddBlog from "../pages/Admin/AddBlog";
+import ManageBlogs from '../pages/Admin/ManageBlogs';
+
 const Routers = () => {
   return (
     <Routes>
@@ -28,6 +32,8 @@ const Routers = () => {
       <Route path="/admin/ContactDetails" element={<ContactDetails />} />
       <Route path="/admin/BookingInformation" element={<BookingInformation />} />
       <Route path="/admin/carDetails" element={<EditCar />} />
+      <Route path="/admin/addBlog" element={<AddBlog />} />
+      <Route path="/admin/manageBlogs" element={<ManageBlogs />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

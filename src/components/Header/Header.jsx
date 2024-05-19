@@ -44,7 +44,7 @@ const adminNavLinks = [
     display: "Add Blog",
   },
   {
-    path: "/admin/blogDetails",
+    path: "/admin/manageBlogs",
     display: "Blog Details",
   },
   {
@@ -172,8 +172,8 @@ const Header = () => {
               <div className="menu">
                 {linksToUse.map((item, index) => (
                   <NavLink
-                   
-                  to={item.path}
+
+                    to={item.path}
                     className={(navClass) =>
                       navClass.isActive ? "nav__active nav__item" : "nav__item"
                     }
