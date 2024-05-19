@@ -25,8 +25,6 @@ const CarDetails = () => {
   
   
   const singleCarItem = carData.filter((item) => item.id == (id));
-  console.log('single car Item ');
-  console.log(singleCarItem);
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -1,3 +1,9 @@
+
+.background-blue-resev{
+  background-color: #000d6b !important;
+  color: white !important;
+  
+}
 .booking__form {
   width: 47.5%;
 }
@@ -40,4 +46,13 @@
   .booking__form select {
     font-size: 0.8rem;
   }
+}
+
+.reserveNo {
+  padding: 8px 15px;
+  border-radius: 5px;
+  background: #000d6b;
+  color: #fff;
+  border: none;
+  outline: none;
 }

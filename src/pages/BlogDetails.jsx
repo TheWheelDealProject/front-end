@@ -1,42 +1,126 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, FormGroup, Input } from "reactstrap";
-
+import { Container, Row, Col, Form, FormGroup, Input, Button } from "reactstrap";
 import { useParams } from "react-router-dom";
-import blogData from "../assets/data/blogData.js";
 import Helmet from "../components/Helmet/Helmet";
 import { Link } from "react-router-dom";
+// import commentImg from "../../src/assets/all-images/comments-img/ava-img2.png";
+import images from '../../src/utils/importImages';
 
-import commentImg from "../assets/all-images/ava-1.jpg";
-
-import "../styles/blog-details.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  
-  const [blogData,setBlogData] = useState([])
- 
-  
-  useEffect(()=>{
-     axios
-     .get("http://localhost:3001/getAllBlogs")
-     .then((Response)=>{
-       setBlogData(Response.data.blogs)
-       
-      })
-      .catch((error)=>{console.error(error)})
-    },[])
-    
-    const blog = blogData.filter((blog) => blog.title === (id));
-    console.log(blog);
-    
-    
 
-   
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [blog]);
-    
+  const [blogData, setBlogData] = useState([])
+  const [commentData, setCommentData] = useState([]);
+
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/getAllBlogs")
+      .then((Response) => {
+        setBlogData(Response.data.blogs)
+
+      })
+      .catch((error) => { console.error(error) })
+  }, []);
+
+  const blog = blogData.filter((blog) => blog.title === (id));
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/getAllComments")
+      .then((response) => {
+        setCommentData(response.data.comments);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+
+    const fullName = e.target.fullName.value;
+    const email = e.target.email.value;
+    const comment = e.target.comment.value;
+
+    const commentData = {
+      firstname: fullName,
+      email: email,
+      comment: comment,
+    };
+
+    axios
+      .post("http://localhost:3001/addComment", commentData)
+      .then((response) => {
+        console.log(response.data);
+        toast.success("Comment Posted Successfully");
+        axios
+          .get("http://localhost:3001/getAllComments")
+          .then((response) => {
+            setCommentData(response.data.comments);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [blog]);
+
+
+  // Array of image filenames
+  // const imageFilenames = [
+  //   "ava-img1.webp",
+  //   "ava-img2.png",
+  //   "ava-img3.png",
+  //   "ava-img4.png",
+  //   "ava-img5.png",
+  //   "ava-img6.png",
+  //   "ava-img7.png",
+  //   "ava-img8.png",
+  //   "ava-img9.png",
+  //   "ava-img10.jpg",
+  // ];
+
+
+  // const getRandomImage = () => {
+  //   const randomIndex = Math.floor(Math.random() * imageFilenames.length);
+  //   return imageFilenames[randomIndex];
+  // };
+
+  //
+  const [randomImages, setRandomImages] = useState([]);
+
+  useEffect(() => {
+    const getRandomImages = () => {
+      const shuffledImages = [...images];
+      for (let i = shuffledImages.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [shuffledImages[i], shuffledImages[randomIndex]] = [
+          shuffledImages[randomIndex],
+          shuffledImages[i],
+        ];
+      }
+      return shuffledImages.slice(0, commentData.length);
+    };
+
+    setRandomImages(getRandomImages());
+  }, [commentData, images]);
+
+  //
   return (
     <Helmet title={blog[0]?.title}>
       <section>
@@ -44,7 +128,7 @@ const BlogDetails = () => {
           <Row>
             <Col lg="8" md="8">
               <div className="blog__details">
-                
+
                 <img src={blog[0]?.imgurl} alt="" className="w-100" />
 
                 <h2 className="section__title mt-4">{blog[0]?.title}</h2>
@@ -71,24 +155,57 @@ const BlogDetails = () => {
               </div>
 
               <div className="comment__list mt-5">
-                <h4 className="mb-5">3 Comments</h4>
-
-                <div className="single__comment d-flex gap-3">
-                  <img src={commentImg} alt="" />
-                  <div className="comment__content">
-                    <h6 className=" fw-bold">David Visa</h6>
-                    <p className="section__description mb-0">14 July, 2022</p>
-                    <p className="section__description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Eos nobis totam eius laborum molestias itaque minima
-                      distinctio, quae velit tempore!
-                    </p>
-
-                    <span className="replay d-flex align-items-center gap-1">
-                      <i className="ri-reply-line"></i> Replay
-                    </span>
+                <h4 className="mb-5">Comments ({commentData.length})</h4>
+                {/* 
+                {commentData.map((comment, index) => (
+                  <div className="single__comment d-flex gap-3" key={index}>
+                    {randomImage && <img src={randomImage}  width={80} height={80} alt="Random" />}
+                    <div className="comment__content">
+                      <h6 className="fw-bold">{comment.firstname}</h6>
+                      <p className="section__description mb-0">{comment.date}</p>
+                      <p className="section__description">{comment.comment}</p>
+                      <span className="replay d-flex align-items-center gap-1">
+                        <i className="ri-reply-line"></i> Reply
+                      </span>
+                    </div>
                   </div>
-                </div>
+                ))} */}
+
+
+                {/* {commentData.map((comment, index) => (
+                  <div className="single__comment d-flex gap-3 mt-3 mb-3" key={index}>
+                    {randomImages[index] && (
+                      <img src={randomImages[index]} width={80} height={80} alt="Random" />
+                    )}
+                    <div className="comment__content">
+                      <h6 className="fw-bold">{comment.firstname}</h6>
+                      <p className="section__description mb-0">{comment.date}</p>
+                      <p className="section__description">{comment.comment}</p>
+                      <span className="replay d-flex align-items-center gap-1">
+                        <i className="ri-reply-line"></i> Reply
+                      </span>
+                    </div>
+                  </div>
+                ))}
+ */}
+
+
+
+                {commentData.map((comment, index) => (
+                  <div className="single__comment d-flex gap-3 mt-3 mb-3" style={{ borderRadius: "80%" }} key={index}>
+                    {randomImages[index] && (
+                      <img src={randomImages[index]} width={80} height={80} alt="Random" />
+                    )}
+                    <div className="comment__content">
+                      <h6 className="fw-bold">{comment.firstname}</h6>
+                      <p className="section__description mb-0">{comment.date}</p>
+                      <p className="section__description">{comment.comment}</p>
+                      <span className="replay d-flex align-items-center gap-1">
+                        <i className="ri-reply-line"></i> Reply
+                      </span>
+                    </div>
+                  </div>
+                ))}
 
                 {/* =============== comment form ============ */}
                 <div className="leave__comment-form mt-5">
@@ -97,23 +214,25 @@ const BlogDetails = () => {
                     You must sign-in to make or comment a post
                   </p>
 
-                  <Form>
-                    <FormGroup className=" d-flex gap-3">
-                      <Input type="text" placeholder="Full name" />
-                      <Input type="email" placeholder="Email" />
+                  <Form onSubmit={handleCommentSubmit}>
+                    <FormGroup className="d-flex gap-3">
+                      <Input type="text" name="fullName" placeholder="Full name" />
+                      <Input type="email" name="email" placeholder="Email" />
                     </FormGroup>
 
                     <FormGroup>
                       <textarea
                         rows="5"
+                        name="comment"
                         className="w-100 py-2 px-3"
                         placeholder="Comment..."
                       ></textarea>
                     </FormGroup>
 
-                    <button className="btn comment__btn mt-3">
+                    <Button type="submit" className="btn comment__btn mt-3">
                       Post a Comment
-                    </button>
+                    </Button>
+
                   </Form>
                 </div>
 
@@ -126,7 +245,7 @@ const BlogDetails = () => {
                 <h5 className=" fw-bold">Recent Posts</h5>
               </div>
               {blogData.map((item) => (
-                
+
                 <div className="recent__blog-post mb-4" key={item.id}>
                   <div className="recent__blog-item d-flex gap-3">
                     <img src={item.imgurl} alt="" className="w-25 rounded-2" />
@@ -134,14 +253,14 @@ const BlogDetails = () => {
                       <Link to={`/blogs/${item.title}`}>{item.title}</Link>
                     </h6>
                   </div>
-                  
+
                 </div>
               ))}
             </Col>
           </Row>
         </Container>
       </section>
-    // </Helmet>
+    </Helmet>
   );
 };
 

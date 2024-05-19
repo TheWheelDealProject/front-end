@@ -48,8 +48,12 @@ const adminNavLinks = [
     display: "Blog Details",
   },
   {
-    path: "/admin/contactDetails",
+    path: "/admin/ContactDetails",
     display: "Contact Details",
+  },
+  {
+    path: "/admin/BookingInformation",
+    display: "Booking Information",
   },
   {
     path: "/home",
