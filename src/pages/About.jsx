@@ -28,21 +28,23 @@ const About = () => {
             <Col lg="6" md="6" sm="12">
               <div className="about__page-content">
                 <h2 className="section__title">
-                  We Are Committed To Provide Safe Ride Solutions
-                </h2>
+                Your Safety is Our Top Priority
+               </h2>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                At The Wheel Deal, we prioritize your safety above all else.
+                Our commitment to providing the safest possible driving experience is evident in every aspect of our service.
+                We meticulously maintain our fleet, ensuring that each vehicle is in pristine condition and equipped with the latest safety features. Our rigorous inspection process guarantees that every car meets the highest industry standards, 
+                giving you the peace of mind you deserve.
                 </p>
-
+              
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                When you choose The Wheel Deal, you're not just renting a car;
+                you're choosing a commitment to your safety.
+                Our fleet exclusively features the latest models,
+                renowned for their advanced safety technologies and superior performance.
+                 With The Wheel Deal, you can embark on your journey with confidence,
+                knowing that we've taken every precaution to ensure your well-being on the road.
                 </p>
 
                 <div className=" d-flex align-items-center gap-3 mt-4">
@@ -52,7 +54,7 @@ const About = () => {
 
                   <div>
                     <h6 className="section__subtitle">Need Any Help?</h6>
-                    <h4>+00123456789</h4>
+                    <h4>+96261234567</h4>
                   </div>
                 </div>
               </div>
