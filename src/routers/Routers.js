@@ -10,6 +10,8 @@ import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import AddCar from '../pages/Admin/AddCar';
 import EditCar from "../pages/Admin/EditCar";
+import AddBlog from "../pages/Admin/AddBlog";
+import ManageBlogs from '../pages/Admin/ManageBlogs';
 
 const Routers = () => {
   return (
@@ -25,6 +27,8 @@ const Routers = () => {
       {/* For Admin Pages */}
       <Route path="/admin/addCar" element={<AddCar />} />
       <Route path="/admin/carDetails" element={<EditCar />} />
+      <Route path="/admin/addBlog" element={<AddBlog />} />
+      <Route path="/admin/manageBlogs" element={<ManageBlogs />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
