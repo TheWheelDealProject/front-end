@@ -1,16 +1,23 @@
 import React from "react";
-
+import { useEffect } from "react";
 import CommonSection from "../components/UI/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 import AboutSection from "../components/UI/AboutSection";
 import { Container, Row, Col } from "reactstrap";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import driveImg from "../assets/all-images/drive.jpg";
 import OurMembers from "../components/UI/OurMembers";
 import "../styles/about.css";
 
 const About = () => {
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
+
   return (
     <Helmet title="About">
       <CommonSection title="About Us" />
@@ -18,7 +25,7 @@ const About = () => {
 
       <section className="about__page-section">
         <Container>
-          <Row>
+          <Row data-aos="fade-left">
             <Col lg="6" md="6" sm="12">
               <div className="about__page-img">
                 <img src={driveImg} alt="" className="w-100 rounded-3" />
@@ -28,23 +35,23 @@ const About = () => {
             <Col lg="6" md="6" sm="12">
               <div className="about__page-content">
                 <h2 className="section__title">
-                Your Safety is Our Top Priority
-               </h2>
+                  Your Safety is Our Top Priority
+                </h2>
 
                 <p className="section__description">
-                At The Wheel Deal, we prioritize your safety above all else.
-                Our commitment to providing the safest possible driving experience is evident in every aspect of our service.
-                We meticulously maintain our fleet, ensuring that each vehicle is in pristine condition and equipped with the latest safety features. Our rigorous inspection process guarantees that every car meets the highest industry standards, 
-                giving you the peace of mind you deserve.
+                  At The Wheel Deal, we prioritize your safety above all else.
+                  Our commitment to providing the safest possible driving experience is evident in every aspect of our service.
+                  We meticulously maintain our fleet, ensuring that each vehicle is in pristine condition and equipped with the latest safety features. Our rigorous inspection process guarantees that every car meets the highest industry standards,
+                  giving you the peace of mind you deserve.
                 </p>
-              
+
                 <p className="section__description">
-                When you choose The Wheel Deal, you're not just renting a car;
-                you're choosing a commitment to your safety.
-                Our fleet exclusively features the latest models,
-                renowned for their advanced safety technologies and superior performance.
-                 With The Wheel Deal, you can embark on your journey with confidence,
-                knowing that we've taken every precaution to ensure your well-being on the road.
+                  When you choose The Wheel Deal, you're not just renting a car;
+                  you're choosing a commitment to your safety.
+                  Our fleet exclusively features the latest models,
+                  renowned for their advanced safety technologies and superior performance.
+                  With The Wheel Deal, you can embark on your journey with confidence,
+                  knowing that we've taken every precaution to ensure your well-being on the road.
                 </p>
 
                 <div className=" d-flex align-items-center gap-3 mt-4">
