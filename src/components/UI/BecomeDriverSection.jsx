@@ -1,19 +1,26 @@
 import React from "react";
+import { useEffect } from "react";
 import "../../styles/become-driver.css";
 import { Container, Row, Col } from "reactstrap";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import driverImg from "../../assets/all-images/toyota-offer-2.png";
 
 const BecomeDriverSection = () => {
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <section className="become__driver">
       <Container>
         <Row>
-          <Col lg="6" md="6" sm="12" className="become__driver-img">
+          <Col lg="6" md="6" sm="12" className="become__driver-img" data-aos="fade-right" >
             <img src={driverImg} alt="" className="w-100" />
           </Col>
 
-          <Col lg="6" md="6" sm="12">
+          <Col lg="6" md="6" sm="12" data-aos="fade-left">
             <h2 className="section__title become__driver-title">
               Do You Want to Earn With Us? So Don't Be Late
             </h2>

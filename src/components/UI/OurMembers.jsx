@@ -1,12 +1,14 @@
 import React from "react";
 import "../../styles/our-member.css";
-import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import ava1 from "../../assets/all-images/ava-1.jpg";
 import ava2 from "../../assets/all-images/ava-2.jpg";
 import ava3 from "../../assets/all-images/ava-3.jpg";
 import ava4 from "../../assets/all-images/ava-4.jpg";
 import ava5 from "../../assets/all-images/ava-5.jpg";
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const OUR__MEMBERS = [
   {
@@ -49,12 +51,20 @@ const OUR__MEMBERS = [
   },
 ];
 
+
 const OurMembers = () => {
+
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
+
   return (
     <div className="our-members">
       {OUR__MEMBERS.map((item, index) => (
         <div className="member" key={index}>
-          <div className="singlemember">
+          <div className="singlemember" data-aos="flip-left">
             <div className="singlemember-img">
               <img src={item.imgUrl} alt={item.name} className="w-100" />
 
@@ -72,7 +82,7 @@ const OurMembers = () => {
             </div>
 
             <h6 className="text-center mb-0 mt-3">{item.name}</h6>
-            <p className="section__description text-center">
+            <p className="sectiondescription text-center">
               {item.experience}
             </p>
           </div>
@@ -83,3 +93,4 @@ const OurMembers = () => {
 };
 
 export default OurMembers;
+

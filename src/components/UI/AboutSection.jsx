@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import "../../styles/about-section.css";
 import aboutImg from "../../assets/all-images/cars-img/bmw-offer.png";
 
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
 const AboutSection = ({ aboutclassName }) => {
+
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, [])
+
+
   return (
     <section
       className="about__section"
@@ -15,22 +25,22 @@ const AboutSection = ({ aboutclassName }) => {
     >
       <Container>
         <Row>
-          <Col lg="6" md="6">
+          <Col lg="6" md="6" data-aos="fade-right">
             <div className="about__section-content">
               <h4 className="section__subtitle">About Us</h4>
               <h2 className="section__title">Welcome to The Wheel Deal</h2>
               <p className="section__description">
                 Experience the open road without breaking the bank! At The Wheel Deal,
-                 we offer a fleet of brand-new rental cars at the most competitive prices in town.
-                  Whether you're planning a weekend getaway, a cross-country road trip,
-                   or simply need a reliable ride, we've got the perfect wheels for you.
-                    With our commitment to quality, convenience, and unbeatable value,
-                     The Wheel Deal is your one-stop shop for hassle-free car rentals.
+                we offer a fleet of brand-new rental cars at the most competitive prices in town.
+                Whether you're planning a weekend getaway, a cross-country road trip,
+                or simply need a reliable ride, we've got the perfect wheels for you.
+                With our commitment to quality, convenience, and unbeatable value,
+                The Wheel Deal is your one-stop shop for hassle-free car rentals.
               </p>
 
               <div className="about__section-item d-flex align-items-center">
                 <p className="section__description d-flex align-items-center gap-2">
-                  <i className="ri-checkbox-circle-line"></i> Tourism Rentals 
+                  <i className="ri-checkbox-circle-line"></i> Tourism Rentals
                 </p>
 
                 <p className="section__description d-flex align-items-center gap-2">
@@ -50,7 +60,7 @@ const AboutSection = ({ aboutclassName }) => {
             </div>
           </Col>
 
-          <Col lg="6" md="6">
+          <Col lg="6" md="6" data-aos="fade-left">
             <div className="about__img">
               <img src={aboutImg} alt="" className="w-100" />
             </div>

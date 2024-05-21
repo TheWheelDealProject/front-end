@@ -22,9 +22,9 @@ const Home = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3001/getAllCars")
-      .then((response) =>{
+      .then((response) => {
         setCarData(response.data.cars)
-      } )
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -52,7 +52,7 @@ const Home = () => {
         <div className="hero__form">
           <Container>
             <Row className="form__row">
-              <Col lg="4" md="4">
+              <Col lg="4" md="4" >
                 <div className="find__cars-left">
                   <h2>Find your best car here</h2>
                 </div>
@@ -71,7 +71,7 @@ const Home = () => {
       <section>
         <Container>
           <Row>
-            <Col lg="12" className="mb-5 text-center">
+            <Col lg="12" className="mb-5 text-center" data-aos="flip-left">
               <h6 className="section__subtitle">See our</h6>
               <h2 className="section__title">Popular Services</h2>
             </Col>
@@ -84,7 +84,7 @@ const Home = () => {
       <section>
         <Container>
           <Row>
-            <Col lg="12" className="text-center mb-5">
+            <Col lg="12" className="text-center mb-5" data-aos="flip-left">
               <h6 className="section__subtitle">Come with</h6>
               <h2 className="section__title">Hot Offers</h2>
             </Col>
