@@ -35,8 +35,8 @@ function AddCarForm() {
         try {
             const response = await axios.post('http://localhost:3001/addCar', values);
             console.log('Car added successfully:', response.data);
-            toast.success("Car Added Successfully!");
             resetForm();
+            toast.success("Car Added Successfully!");
         } catch (error) {
             console.error('Error adding car:', error);
             toast.error("Something went wrong!");
