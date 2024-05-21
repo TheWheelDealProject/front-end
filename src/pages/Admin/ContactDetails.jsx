@@ -16,16 +16,16 @@ function ContactDetails() {
 
   const fetchData = () => {
     try {
-      setLoading(true)
       axios
         .get('http://localhost:3001/getAllContacts')
         .then(response => {
           setContactData(response.data.contacts);
+          setLoading(false)
         })
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false)
+      setLoading(true)
     }
   };
 

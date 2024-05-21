@@ -12,8 +12,8 @@ import CarItem from "../components/UI/CarItem";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
 
-import BlogList from "../components/UI/BlogList";
 import axios from "axios";
+import BlogItem from "../components/UI/BlogItem";
 
 
 const Home = () => {
@@ -27,6 +27,21 @@ const Home = () => {
       } )
       .catch((error) => console.error(error));
   }, []);
+
+
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+    try {
+      axios.get("http://localhost:3001/getAllBlogs").then((response) => {
+        setBlogData(response.data.blogs);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+
 
   return (
     <Helmet title="Home">
@@ -74,7 +89,7 @@ const Home = () => {
               <h2 className="section__title">Hot Offers</h2>
             </Col>
 
-            {carData.slice(0, 6).map((item) => (
+            {carData.slice(0, 3).map((item) => (
               <CarItem item={item} key={item.id} />
             ))}
           </Row>
@@ -105,8 +120,10 @@ const Home = () => {
               <h6 className="section__subtitle">Explore our blogs</h6>
               <h2 className="section__title">Latest Blogs</h2>
             </Col>
-
-            <BlogList />
+            {blogData.slice(0, 3).map((item) => (
+              <BlogItem item={item} key={item.id} />
+            ))}
+            {/* <BlogList /> */}
           </Row>
         </Container>
       </section>

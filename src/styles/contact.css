@@ -1,3 +1,8 @@
+
+.contact__info{
+  padding-left: 20%;
+  padding-top: 2%;
+}
 .social__link-icon {
   text-decoration: none;
 
@@ -21,3 +26,23 @@
     font-size: 0.8rem;
   }
 }
+
+.map-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-iframe {
+  width: 100%;
+  height: 450px;
+  border: 0;
+}
+.map-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+

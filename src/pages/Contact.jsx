@@ -5,8 +5,6 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 
 import "../styles/contact.css";
-import axios from "axios";
-import { toast } from "react-toastify";
 
 const socialLinks = [
   {
@@ -18,7 +16,7 @@ const socialLinks = [
     icon: "ri-instagram-line",
   },
   {
-    url: "https://www.linkedin.com/in/yassin-al-farwan-9010b9266/",
+    url: "#",
     icon: "ri-linkedin-line",
   },
   {
@@ -26,53 +24,39 @@ const socialLinks = [
     icon: "ri-twitter-line",
   },
 ];
-
 const Contact = () => {
-  function fetchData(e) {
-    e.preventDefault();
-  
-    const fullName = e.target.fullName.value;
-    const email = e.target.email.value;
-    const textArea = e.target.textArea.value;
-  
-    const data = {
-      firstname: fullName,
-      email: email,
-      description: textArea
-    };
-  
-    axios
-      .post('http://localhost:3001/addContact', data)
-      .then(response => {
-        console.log(response.data); // Handle successful response
-        toast.success('Message Sent Successfully');
-        e.target.reset(); // Reset the form fields
-      })
-      .catch(error => {
-        console.error(error); // Handle error
-      });
-  }
+
 
 
   return (
     <Helmet title="Contact">
       <CommonSection title="Contact" />
+      <div className="col-12">
+        <div className="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1693.6594445656303!2d35.87004194134388!3d31.897931994151637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ca7e4aee722d5%3A0x8693a9183825010b!2z2YPZhNmK2Kkg2YTZiNmF2YrZhtmI2LMg2KfZhNis2KfZhdi52YrYqSDYp9mE2KrZgtmG2YrYqSAiINmE2YjZhdmK2YbZiNizINmE2KfZitmBINio2YTYsyAi!5e0!3m2!1sar!2sjo!4v1716294777443!5m2!1sar!2sjo"
+            className="map-iframe"
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
       <section>
         <Container>
           <Row>
             <Col lg="7" md="7">
               <h6 className="fw-bold mb-4">Get In Touch</h6>
 
-              <Form onSubmit={fetchData}>
+              <Form>
                 <FormGroup className="contact__form">
-                  <Input name="fullName" placeholder="Your Name" type="text" />
+                  <Input placeholder="Your Name" type="text" />
                 </FormGroup>
                 <FormGroup className="contact__form">
-                  <Input name="email" placeholder="Email" type="email" />
+                  <Input placeholder="Email" type="email" />
                 </FormGroup>
                 <FormGroup className="contact__form">
                   <textarea
-                  name="textArea"
                     rows="5"
                     placeholder="Message"
                     className="textarea"
@@ -83,29 +67,29 @@ const Contact = () => {
                   Send Message
                 </button>
               </Form>
-
-              
             </Col>
 
             <Col lg="5" md="5">
               <div className="contact__info">
                 <h6 className="fw-bold">Contact Information</h6>
                 <p className="section__description mb-0">
-                  11182 Airport Road, Amman, Jordan
+                  123 ZindaBazar, Sylhet, Bangladesh
                 </p>
-                <div className=" d-flex align-items-center gap-2">
+                <div className="d-flex align-items-center gap-2">
                   <h6 className="fs-6 mb-0">Phone:</h6>
-                  <p className="section__description mb-0">+96261234567</p>
+                  <p className="section__description mb-0">+88683896366</p>
                 </div>
 
-                <div className=" d-flex align-items-center gap-2">
+                <div className="d-flex align-items-center gap-2">
                   <h6 className="mb-0 fs-6">Email:</h6>
-                  <p className="section__description mb-0">Info@TWDJO.com</p>
+                  <p className="section__description mb-0">
+                    example@gmail.com
+                  </p>
                 </div>
 
                 <h6 className="fw-bold mt-4">Follow Us</h6>
 
-                <div className=" d-flex align-items-center gap-4 mt-3">
+                <div className="d-flex align-items-center gap-4 mt-3">
                   {socialLinks.map((item, index) => (
                     <Link
                       to={item.url}

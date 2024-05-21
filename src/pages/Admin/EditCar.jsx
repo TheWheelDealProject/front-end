@@ -35,16 +35,15 @@ function EditCar() {
 
     useEffect(() => {
         try {
-            setLoading(true);
             axios.get('http://localhost:3001/getAllCars')
-                .then(response => {
-                    setCars(response.data.cars);
-                    console.log(response.data.cars);
+            .then(response => {
+                setCars(response.data.cars);
+                setLoading(false);
                 })
         } catch (error) {
             console.error('There was an error fetching the cars!', error);
         } finally {
-            setLoading(false);
+            setLoading(true);
         }
     }, [refresh]);
 

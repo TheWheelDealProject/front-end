@@ -1,3 +1,20 @@
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-group> :not(:first-child) {
+  background-color: #4c4cff;
+}
+
+.spinner-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 300px !important;
+  /* Adjust the height as per your layout */
+}
+
 .blog__item {
   border: 1px solid #7c8a972e;
 }

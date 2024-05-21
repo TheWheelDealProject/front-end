@@ -1,81 +1,75 @@
-import React, { createContext, useEffect, useState } from "react";
-import { Col } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Spinner } from "reactstrap";
 import "../../styles/blog-item.css";
-import { Link } from "react-router-dom";
-import bogData from "../../assets/data/blogData";
 import axios from "axios";
-
-
-
+import { BsSearch } from "react-icons/bs";
+import { Form, Row } from "react-bootstrap";
+import BlogItem from "./BlogItem"; 
 
 const BlogList = () => {
- 
-  const [blogData,setBlogData] = useState([])
-  
-  useEffect(()=>{
-  axios
-  .get("http://localhost:3001/getAllBlogs")
-  .then((Response)=>{
-   setBlogData(Response.data.blogs)
-  
-  })
-  .catch((error)=>{console.error(error)})
-  },[])
-  
-   return (
-     <>
-         {blogData.map((item) => (
-        <BlogItem item={item} key={item.id} />
+  const [blogData, setBlogData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
-      ))}
-      
-    </>
-   );
- };
+  useEffect(() => {
+    try {
+      axios.get("http://localhost:3001/getAllBlogs").then((response) => {
+        setBlogData(response.data.blogs);
+        setLoading(false);
+      });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  }, []);
 
-  const BlogItem = ({ item }) => {
-  const { imgurl, title, author, date, description, time } = item;
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredBlogs = blogData.filter((blog) =>
+    blog.title && blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <Col lg="4" md="6" sm="6" className="mb-5">
-      <div className="blog__item">
-        <img src={imgurl} alt="" className="w-100" />
-        <div className="blog__info p-3">
-          <Link to={`/blogs/${title}`}  className="blog__title">
-            {title}
-          </Link>
-          <p className="section__description mt-3">
-            {description.length > 100
-              ? description.substr(0, 100)
-              : description}
-          </p>
+    <>
+      <Row className="mb-5">
+        <Col lg="12">
+          <Form>
+            <Form.Group className="d-flex align-items-center gap-3">
+              <div className="input-group search-container">
+                <Form.Control
+                  type="text"
+                  placeholder="Search a blog..."
+                  value={searchQuery}
+                  onChange={handleSearchQueryChange}
+                />
+                <span className="input-group-text" id="basic-addon2">
+                  <BsSearch className="fs-6" />
+                </span>
+              </div>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
 
-          <Link to={`/blogs/${title}`} className="read__more">
-            Read More
-          </Link>
-
-          <div className="blog__time pt-3 mt-3 d-flex align-items-center justify-content-between">
-            <span className="blog__author">
-              <i className="ri-user-line"></i> {author}
-            </span>
-
-            <div className=" d-flex align-items-center gap-3">
-              <span className=" d-flex align-items-center gap-1 section__description">
-                <i className="ri-calendar-line"></i> {date}
-              </span>
-
-              <span className=" d-flex align-items-center gap-1 section__description">
-                <i className="ri-time-line"></i> {time}
-              </span>
-            </div>
+      {loading ? (
+        <div className="blog__item">
+          <div className="spinner-container">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
           </div>
         </div>
-      </div>
-    </Col>
+      ) : (
+        <>
+          {filteredBlogs.map((item) => (
+            <BlogItem item={item} key={item.id} />
+          ))}
+        </>
+      )}
+    </>
   );
- 
-}; 
-
-
+};
 
 export default BlogList;
-

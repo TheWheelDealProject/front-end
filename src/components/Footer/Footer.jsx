@@ -37,22 +37,27 @@ const Footer = () => {
     <footer className="footer">
       <Container>
         <Row>
-          <Col lg="4" md="4" sm="12">
+        
+          <Col lg="4" md="4" sm="12"> 
+          <div  style={{paddingRight:"20px"}}>
+
             <div className="logo footer__logo">
               <h1>
                 <Link to="/home" className=" d-flex align-items-center gap-2">
-                <img src="https://i.ibb.co/wrJ72Hj/TWD.png" width="100%"
+                <img src="https://i.ibb.co/wrJ72Hj/TWD.png" width="80%"
                     height="100px"></img>
                 </Link>
               </h1>
             </div>
-            <p className="footer__logo-content">
+            <p className="footer__logo-content align-itmes-center">
             The Wheel Deal: Your trusted partner for affordable,
              reliable, and safe car rentals.
-              Whether it's a quick trip, a special occasion,
-              or your daily commute,
+              Whether it's a quick trip, special occasion,
+              or your daily commute
              we have the perfect car for you.
             </p>
+
+          </div>
           </Col>
 
           <Col lg="2" md="4" sm="6">

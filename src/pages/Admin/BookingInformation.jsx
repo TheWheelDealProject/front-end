@@ -6,21 +6,27 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import "../../styles/booking-information.css";
 import { Container } from 'react-bootstrap';
+import { Spinner } from 'reactstrap';
 
 
 function BookingInformation() {
   const [bookingData, setBookingData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/getAllBookingInfo')
-      .then(response => {
-        // Update the state with the received data
-        setBookingData(response.data.bookingInfos);
-      })
-      .catch(error => {
-        // Handle the error if needed
-        console.error(error);
-      });
+    try{
+      axios.get('http://localhost:3001/getAllBookingInfo')
+        .then(response => {
+          // Update the state with the received data
+          setBookingData(response.data.bookingInfos);
+          setLoading(false)
+        })
+    
+    }catch(error){
+      console.error(error);
+    }finally{
+      setLoading(true)
+    }
   }, []);
 
   const handleDelete = (id) => {
@@ -45,6 +51,16 @@ function BookingInformation() {
         <div className="bookingInformation-title">
           <h1>Booking Informations</h1>
         </div>
+        {loading ? (
+          <div className="blog__item">
+            <div className="spinner-container">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            </div>
+          </div>
+      ) : (
+
         <div className="booking-table-base">
           {/* Table Structure */}
           <Table striped bordered hover responsive>
@@ -86,6 +102,7 @@ function BookingInformation() {
             </tbody>
           </Table>
         </div>
+      )}
         <ToastContainer />
       </Container>
     </>

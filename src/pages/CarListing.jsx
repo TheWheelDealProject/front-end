@@ -1,52 +1,84 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Spinner, Form } from "react-bootstrap";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import CarItem from "../components/UI/CarItem";
 import axios from "axios";
+import "../styles/carList.css";
+import { BsSearch } from 'react-icons/bs';
 
 const CarListing = () => {
+  const [loading, setLoading] = useState(true);
   const [carData, setCarData] = useState([]);
-  console.log(carData);
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/getAllCars")
-      .then((response) =>{
-        setCarData(response.data.cars)
-      } )
-      .catch((error) => console.error(error));
+    try {
+      axios.get("http://localhost:3001/getAllCars").then((response) => {
+        setCarData(response.data.cars);
+        setLoading(false);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-
+  const filteredCars = carData.filter((car) =>
+    car.carname && car.carname.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Helmet title="Cars">
       <CommonSection title="Car Listing" />
+      {loading ? (
+        <div className="spinner-container">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      ) : (
+        <section>
+          <Container>
+            <Row className="mb-5">
+              <Col lg="12">
+                <Form>
+                  <Form.Group className="d-flex align-items-center gap-3">
+                    <div className="input-group search-container">
+                      <Form.Control
+                        type="text"
+                        placeholder="Search a car..."
+                        value={searchQuery}
+                        onChange={handleSearchQueryChange}
+                      />
+                      <span className="input-group-text" id="basic-addon2">
+                        <BsSearch className="fs-6" />
+                      </span>
+                    </div>
 
-      <section>
-        <Container>
-          <Row>
-            <Col lg="12">
-              <div className="d-flex align-items-center gap-3 mb-5">
-                <span className="d-flex align-items-center gap-2">
-                  <i className="ri-sort-asc"></i> Sort By
-                </span>
+                    <Form.Select>
+                      <option>Select</option>
+                      <option value="low">Low to High</option>
+                      <option value="high">High to Low</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
 
-                <select>
-                  <option>Select</option>
-                  <option value="low">Low to High</option>
-                  <option value="high">High to Low</option>
-                </select>
-              </div>
-            </Col>
-
-            {carData.map((item) => (
-              <CarItem item={item} key={item.id} />
-            ))}
-          </Row>
-        </Container>
-      </section>
+            <Row>
+              {filteredCars.map((car) => (
+                // <Col lg="2" key={car.id}>
+                <CarItem item={car} />
+                // </Col>
+              ))}
+            </Row>
+          </Container>
+        </section>
+      )}
     </Helmet>
   );
 };
