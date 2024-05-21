@@ -43,7 +43,7 @@ const AddBlog = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:3001/addBlog', blogPostData);
+            const response = await axios.post(`${process.env.REACT_APP_URL_SERVER}/addBlog`, blogPostData);
             console.log('Blog added successfully:', response.data);
             toast.success("Blog Added Successfully!");
             setBlogData({

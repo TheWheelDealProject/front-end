@@ -13,7 +13,7 @@ const BlogList = () => {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:3001/getAllBlogs").then((response) => {
+       axios.get(`${process.env.REACT_APP_URL_SERVER}/getAllBlogs`).then((response) => {
         setBlogData(response.data.blogs);
         setLoading(false);
       });

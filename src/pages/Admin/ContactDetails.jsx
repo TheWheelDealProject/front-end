@@ -17,7 +17,7 @@ function ContactDetails() {
   const fetchData = () => {
     try {
       axios
-        .get('http://localhost:3001/getAllContacts')
+        .get(`${process.env.REACT_APP_URL_SERVER}/getAllContacts`)
         .then(response => {
           setContactData(response.data.contacts);
           setLoading(false)
@@ -31,8 +31,8 @@ function ContactDetails() {
 
   const handleDeleteContact = (id) => {
     axios
-      .delete(`http://localhost:3001/deleteContact/${id}`)
-      .then(response => {
+    .delete(`${process.env.REACT_APP_URL_SERVER}/deleteContact/${id}`)
+    .then(response => {
         console.log(response.data);
         // Update the contactData state after successful deletion
         setContactData(prevData => prevData.filter(contact => contact.id !== id));

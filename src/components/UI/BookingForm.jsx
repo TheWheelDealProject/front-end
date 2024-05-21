@@ -22,7 +22,7 @@ const BookingForm = () => {
   };
 
   axios
-    .post('http://localhost:3001/addBookingInfo', bookinginfo)
+     .post(`${process.env.REACT_APP_URL_SERVER}/addBookingInfo`, bookinginfo)
     .then((response) => {
       toast.success('Booking Information Added Successfully!');
       // Clear the form fields

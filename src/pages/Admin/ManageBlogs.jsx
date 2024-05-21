@@ -25,7 +25,7 @@ const ManageBlogs = () => {
     const fetchBlogs = async () => {
         try {
             setLoading(true); // Set loading to true before making the request
-            const response = await axios.get('http://localhost:3001/getAllBlogs');
+            const response = await axios.get(`${process.env.REACT_APP_URL_SERVER}/getAllBlogs`);
             setBlogs(response.data.blogs);
         } catch (error) {
             console.error('Error fetching blogs:', error);
@@ -37,7 +37,7 @@ const ManageBlogs = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:3001/deleteBlog/${id}`);
+            await axios.delete(`${process.env.REACT_APP_URL_SERVER}/deleteBlog/${id}`);
             setBlogs(blogs.filter(blog => blog.id !== id));
             toast.success("Blog Deleted Successfully!");
         } catch (error) {
@@ -65,7 +65,7 @@ const ManageBlogs = () => {
 
     const handleUpdate = async () => {
         try {
-            await axios.put(`http://localhost:3001/editBlog/${currentBlog.id}`, currentBlog);
+            await axios.put(`${process.env.REACT_APP_URL_SERVER}/editBlog/${currentBlog.id}`, currentBlog);
             fetchBlogs();
             handleCloseModal();
             toast.success("Blog Updated Successfully!");

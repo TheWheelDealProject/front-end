@@ -15,7 +15,7 @@ function BookingInformation() {
 
   useEffect(() => {
     try{
-      axios.get('http://localhost:3001/getAllBookingInfo')
+      axios.get(`${process.env.REACT_APP_URL_SERVER}/getAllBookingInfo`)
         .then(response => {
           // Update the state with the received data
           setBookingData(response.data.bookingInfos);
@@ -30,8 +30,8 @@ function BookingInformation() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteBookingInfo/${id}`)
-      .then(response => {
+    axios.delete(`${process.env.REACT_APP_URL_SERVER}/deleteBookingInfo/${id}`)
+    .then(response => {
         // Remove the deleted record from the state
         setBookingData(prevData => prevData.filter(booking => booking.id !== id));
         // Show success toast

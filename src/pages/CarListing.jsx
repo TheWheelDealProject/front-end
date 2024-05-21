@@ -14,7 +14,7 @@ const CarListing = () => {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:3001/getAllCars").then((response) => {
+       axios.get(`${process.env.REACT_APP_URL_SERVER}/getAllCars`).then((response) => {
         setCarData(response.data.cars);
         setLoading(false);
       });

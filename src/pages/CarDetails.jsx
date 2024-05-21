@@ -14,7 +14,8 @@ const CarDetails = () => {
   const { id } = useParams();
   useEffect(() => {
     axios
-    .get(`http://localhost:3001/getCar/${id}`)
+    .get(`${process.env.REACT_APP_URL_SERVER}/getCar/${id}`)
+
       .then((response) => {
         setCarData(response.data)
       })

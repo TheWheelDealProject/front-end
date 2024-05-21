@@ -19,7 +19,7 @@ const BlogDetails = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/getAllBlogs")
+       .get(`${process.env.REACT_APP_URL_SERVER}/getAllBlogs`)
       .then((Response) => {
         setBlogData(Response.data.blogs)
 
@@ -31,7 +31,7 @@ const BlogDetails = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/getAllComments")
+      .get(`${process.env.REACT_APP_URL_SERVER}/getAllComments`)
       .then((response) => {
         setCommentData(response.data.comments);
       })
@@ -56,12 +56,12 @@ const BlogDetails = () => {
     };
 
     axios
-      .post("http://localhost:3001/addComment", commentData)
+       .post(`${process.env.REACT_APP_URL_SERVER}/addComment`, commentData)
       .then((response) => {
         console.log(response.data);
         toast.success("Comment Posted Successfully");
         axios
-          .get("http://localhost:3001/getAllComments")
+           .get(`${process.env.REACT_APP_URL_SERVER}/getAllComments`)
           .then((response) => {
             setCommentData(response.data.comments);
           })

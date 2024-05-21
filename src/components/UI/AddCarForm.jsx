@@ -33,7 +33,7 @@ function AddCarForm() {
         console.log("I am in handle submit function");
         console.log('Form Data:', values);
         try {
-            const response = await axios.post('http://localhost:3001/addCar', values);
+            const response = await axios.post(`${process.env.REACT_APP_URL_SERVER}/addCar`, values);
             console.log('Car added successfully:', response.data);
             resetForm();
             toast.success("Car Added Successfully!");

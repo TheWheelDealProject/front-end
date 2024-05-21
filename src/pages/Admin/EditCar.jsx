@@ -35,7 +35,7 @@ function EditCar() {
 
     useEffect(() => {
         try {
-            axios.get('http://localhost:3001/getAllCars')
+            axios.get(`${process.env.REACT_APP_URL_SERVER}/getAllCars`)
             .then(response => {
                 setCars(response.data.cars);
                 setLoading(false);
@@ -48,8 +48,8 @@ function EditCar() {
     }, [refresh]);
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:3001/deleteCar/${id}`)
-            .then(response => {
+        axios.delete(`${process.env.REACT_APP_URL_SERVER}/deleteCar/${id}`)
+        .then(response => {
                 console.log(`Car with ID: ${id} deleted successfully.`);
                 setCars(prevCars => prevCars.filter(car => car.id !== id));
                 setRefresh(prev => !prev);
@@ -86,8 +86,8 @@ function EditCar() {
     };
 
     const handleModalSubmit = () => {
-        axios.put(`http://localhost:3001/editCar/${selectedCar.id}`, selectedCar)
-            .then(response => {
+        axios.put(`${process.env.REACT_APP_URL_SERVER}/editCar/${selectedCar.id}`, selectedCar)
+        .then(response => {
                 setCars(prevCars => prevCars.map(car => car.id === selectedCar.id ? selectedCar : car));
                 console.log(`Car with ID: ${selectedCar.id} updated successfully.`);
                 setRefresh(prev => !prev);

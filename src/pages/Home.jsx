@@ -21,7 +21,7 @@ const Home = () => {
   const [carData, setCarData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/getAllCars")
+       .get(`${process.env.REACT_APP_URL_SERVER}/getAllCars`)
       .then((response) => {
         setCarData(response.data.cars)
       })
@@ -33,7 +33,7 @@ const Home = () => {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:3001/getAllBlogs").then((response) => {
+      axios.get(`${process.env.REACT_APP_URL_SERVER}/getAllBlogs`).then((response) => {
         setBlogData(response.data.blogs);
       });
     } catch (error) {
